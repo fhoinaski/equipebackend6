@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const { connect } = require("./database/connect");
 const routes = require("./routes");
 
@@ -9,13 +8,13 @@ class Server {
   constructor(server = express()) {
     this.middlewares(server);
     this.database();
-    this.todasRodas(server);
+    this.allRoutes(server);
     this.start(server);
   };
 
   async middlewares(app) {
-    app.use(cors()) 
-    app.use(express.json()) 
+    app.use(cors())
+    app.use(express.json())
   }
 
   async database() {
@@ -34,10 +33,10 @@ class Server {
     });
   }
 
-  async todasRodas(app) {
+  async todasRotas(app) {
     app.use(routes)
   }
 
 }
 
-module.exports = { Server};
+module.exports = { Server };
