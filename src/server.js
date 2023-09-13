@@ -8,7 +8,7 @@ class Server {
   constructor(server = express()) {
     this.middlewares(server);
     this.database();
-    this.allRoutes(server);
+    this.todasRotas(server);
     this.start(server);
   };
 
