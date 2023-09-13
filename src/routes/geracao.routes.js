@@ -22,6 +22,7 @@ class GeracaoRoutes {
         geracaoRoutes.patch('/updateOneTotal', updateOneTotal);
         geracaoRoutes.delete('/deleteOneUnidade', deleteOneUnidade);
         geracaoRoutes.restore('/restoreOneUnidade', restoreOneUnidade);
+        return geracaoRoutes;
     }
 }
 
