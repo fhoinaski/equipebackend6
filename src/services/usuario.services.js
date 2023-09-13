@@ -1,4 +1,4 @@
-const { User } = require("../models/Usuario");
+const { Usuario } = require("../models/Usuario");
 const { sign } = require("jsonwebtoken");
 
 const UserServices = {
@@ -17,7 +17,7 @@ const UserServices = {
           return { data: "Email inválido", status: 400 };
         }
     
-        const emailExistente = await User.findOne({
+        const emailExistente = await Usuario.findOne({
           where: { email: user.email },
         });
     
@@ -34,13 +34,13 @@ const UserServices = {
           };
         }
     
-        const usuarioExistente = await User.findOne({ where: { email: user.email } });
+        const usuarioExistente = await Usuario.findOne({ where: { email: user.email } });
     
         if (usuarioExistente) {
           return { data: "e-mail já cadastrado.", status: 409 };
         }
     
-        const data = await User.create(user);
+        const data = await Usuario.create(user);
     
         return { data, status: 201 };
       },
