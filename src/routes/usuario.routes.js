@@ -26,6 +26,7 @@ class UsuarioRoutes {
         usuarioRoutes.patch('/updateOneSenha/:id/senha', auth, updateOneSenha);
         usuarioRoutes.delete('/deleteOneUsuario/:id', auth, deleteOneUsuario);
         usuarioRoutes.patch('/restoreOneUsuario/:id', auth, restoreOneUsuario);
+        return usuarioRoutes;
     }
 }
 

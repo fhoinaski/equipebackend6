@@ -7,10 +7,10 @@ const { routesFromGeracao } = require('./geracao.routes');
 const routes = Router();
 
 routes.use('/api', [
-    routesFromUsuario(),
+    // routesFromUsuario(),
     routesFromUnidade(),
-    //routesFromLogin(),
-    routesFromGeracao(),
+    // routesFromLogin,
+    // routesFromGeracao(),
 ]);
 
 module.exports = routes;
