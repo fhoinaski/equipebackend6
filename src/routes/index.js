@@ -1,12 +1,11 @@
 const { Router } = require('express');
-const { routesFromUser } = require('./v1/usuario.routes')
+const routes = Router();
 
-const routes = new Router();
-
-routes.use('/api/v1/', [
-    routesFromUser()
-])
-
- 
+routes.use('/api', [
+    routesFromUsuario(),
+    routesFromUnidade(),
+    //routesFromLogin(),
+    routesFromGeracao(),
+]);
 
 module.exports = routes;
