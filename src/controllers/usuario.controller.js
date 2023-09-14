@@ -1,7 +1,7 @@
 const { Usuario } = require('../models/Usuario');
 const { senha } = require('../models/Usuario');
 const { JWT_SECRET } = require('../config/db.config');
-const { config } = require('dorenv');
+const { config } = require('dotenv');
 const { sign } = require('jsonwebtoken');
 const { res } = require('express');
 config();

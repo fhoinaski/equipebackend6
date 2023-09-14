@@ -15,7 +15,7 @@ const auth = require('../middlewares/auth');
 class GeracaoRoutes {
     routesFromGeracao() {
         const geracaoRoutes = Router()
-        geracaoRoutes.get('/listallUnidades', listAllUnidades);
+        geracaoRoutes.get('/listAllUnidades', listAllUnidades);
         geracaoRoutes.post('/createOneDate', createOneDate);
         geracaoRoutes.post('/createOneTotal', createOneTotal);
         geracaoRoutes.patch('/updateOneDate', updateOneDate);
