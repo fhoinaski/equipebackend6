@@ -5,11 +5,11 @@ class GeracaoController {
 
   async createOneGeracao(request, response) {
 
-    const {  unidadeId,
-             referenceDate, 
-             totalGenerated 
-            } = request.body
-    
+    const { unidadeId,
+      referenceDate,
+      totalGenerated
+    } = request.body
+
     try {
 
       if (!unidadeId) {
@@ -26,18 +26,19 @@ class GeracaoController {
 
       const geracaoMensal = await Geracao.findOne({
         where: {
-
+          unidadeId,
+          referenceDate
         }
       })
 
       if (geracaoMensal) {
         return response.status(400).send({ message: "Já existe lançamento para essa unidade nesse mês" })
       }
-      
+
       const novaGeracaoMensal = await Deposit_Medicine.create({
-            unidadeId,
-            referenceDate, 
-            totalGenerated
+        unidadeId,
+        referenceDate,
+        totalGenerated
       })
 
       return response.status(200).send({ "Identificador": Geracao.id, message: "Novo lançamento incluido com sucesso" })
