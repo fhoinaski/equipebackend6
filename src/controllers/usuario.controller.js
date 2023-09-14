@@ -13,7 +13,6 @@ class UsuarioController {
                 name,
                 email,
                 password,
-                status
             } = req.body;
 
             const usuarioExistente = await Usuario.findOne({
@@ -30,8 +29,8 @@ class UsuarioController {
             const usuario = await Usuario.create({
                 name,
                 email,
-                password: password,
-                status
+                password,
+
             });
 
             return res.status(200).send({
@@ -39,9 +38,9 @@ class UsuarioController {
                 usuario
             });
         } catch (error) {
-            const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(status).send({
+            return res.status().send({
+
                 message: 'Falha na operação de criar usuário',
                 cause: message
             });
@@ -142,10 +141,10 @@ class UsuarioController {
         try {
             const { id } = req.params;
             const {
-                nome,
+                name,
                 email,
-                password,
-                status
+                password
+
             } = req.body;
 
             const usuario = await Usuario.findOne({
@@ -159,15 +158,16 @@ class UsuarioController {
                 });
             }
 
-            if (!nome && !email && !password && !status) {
+            if (!name && !email && !password ) {
+
                 return res.status(400).send({
                     message: 'Falha na operação de atualizar usuário',
                     cause: 'Nenhum dado para atualizar'
                 });
             }
 
-            if (nome !== undefined) {
-                usuario.nome = nome;
+            if (name !== undefined) {
+                usuario.name = name;
             }
             if (email !== undefined) {
                 usuario.email = email;
@@ -175,10 +175,6 @@ class UsuarioController {
             if (password !== undefined) {
                 usuario.password = password;
             }
-            if (status !== undefined) {
-                usuario.status = status;
-            }
-
             await usuario.save();
 
             return res.status(200).send({
@@ -244,14 +240,14 @@ class UsuarioController {
 
             if (!usuario) {
                 return res.status(404).send({
-                    message: 'Falha na operação de atualizar senha',
+                    message: 'Falha na operação de atualizar password',
                     cause: 'Usuário não encontrado'
                 });
             }
 
             if (!password) {
                 return res.status(400).send({
-                    message: 'Falha na operação de atualizar senha',
+                    message: 'Falha na operação de atualizar password',
                     cause: 'Senha não informada'
                 });
             }
@@ -265,8 +261,9 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(status).send({
-                message: 'Falha na operação de atualizar senha',
+            return res.status(parceInt(status)).send({
+                message: 'Falha na operação de atualizar password',
+
                 cause: message
             });
         }

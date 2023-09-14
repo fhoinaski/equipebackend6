@@ -8,6 +8,7 @@ const routes = Router();
 
 routes.use('/api', [
     routesFromUsuario(),
+
     routesFromUnidade(),
     // routesFromLogin,
     //routesFromGeracao(),
