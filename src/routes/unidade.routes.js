@@ -16,16 +16,14 @@ const auth = require('../middlewares/auth');
 class UnidadeRoutes {
     routesFromUnidade() {
         const unidadeRoutes = Router()
-
-        unidadeRoutes.post('/createOneUnidade',  createOneUnidade);
-        unidadeRoutes.get('/listAllUnidades', listAllUnidades);
-        unidadeRoutes.get('/listOneUnidade/:id', listOneUnidade);
-        unidadeRoutes.get('/listAllUnidadesAtivas', listAllUnidadesAtivas);
-        unidadeRoutes.get('/listAllUnidadesInativas', listAllUnidadesInativas);
-        unidadeRoutes.put('/updateOneUnidade/:id', updateOneUnidade);
-        unidadeRoutes.delete('/deleteOneUnidade/:id',  deleteOneUnidade);
-        unidadeRoutes.patch('/restoreOneUnidade/:id', restoreOneUnidade);
-
+        unidadeRoutes.post('/createOneUnidade', auth, createOneUnidade);
+        unidadeRoutes.get('/listAllUnidades', auth, listAllUnidades);
+        unidadeRoutes.get('/listOneUnidade/:id', auth, listOneUnidade);
+        unidadeRoutes.get('/listAllUnidadesAtivas', auth, listAllUnidadesAtivas);
+        unidadeRoutes.get('/listAllUnidadesInativas', auth, listAllUnidadesInativas);
+        unidadeRoutes.patch('/updateOneUnidade/:id', auth, updateOneUnidade);
+        unidadeRoutes.delete('/deleteOneUnidade/:id', auth, deleteOneUnidade);
+        unidadeRoutes.patch('/restoreOneUnidade/:id', auth, restoreOneUnidade);
         return unidadeRoutes;
     }
 }

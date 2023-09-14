@@ -4,6 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('geracaos', { 
+
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -22,11 +23,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      total_generated: {  
+      total_generated: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      
+
       created_at: {
         type: Sequelize.DATE,
         allowNull: false
@@ -35,14 +36,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      deleted_at: {  
+      deleted_at: {
         type: Sequelize.DATE,
         allowNull: true
       }
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('geracao');
   }
 };

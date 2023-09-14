@@ -4,6 +4,7 @@ const { Unidade } = require("../models/unidades");
 class GeracaoController {
 
   async createOneGeracao(request, response) {
+
     const {  unidadeId,
              referenceDate, 
              totalGenerated 
@@ -25,8 +26,8 @@ class GeracaoController {
 
       const geracaoMensal = await Geracao.findOne({
         where: {
-            unidadeId,
-            referenceDate
+          unidadeId,
+          referenceDate
         }
       })
 
@@ -49,9 +50,6 @@ class GeracaoController {
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao criar lançamento", cause: error.message })
-    } 
-
-  }
 
   async listaGeracaoDaUnidade (request, response) {
     const { unidadeId } = request.params
@@ -75,10 +73,8 @@ class GeracaoController {
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", cause: error.message })
-    }
-      
-    }
-
+    }    
+  }
 }
 
 module.exports = new GeracaoController();
