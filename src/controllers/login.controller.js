@@ -1,5 +1,5 @@
 const { Usuario } = require('../models/Usuario');
-const { senha } = require('../models/Usuario');
+const { password } = require('../models/Usuario');
 const { JWT_SECRET } = require('../config/config');
 const { config } = require('dotenv');
 const { sign } = require('jsonwebtoken');
@@ -9,7 +9,7 @@ config();
 class LoginController {
     async loginUsuario(req, res) {
         try {
-            const { email, senha } = req.body;
+            const { email, password } = req.body;
             const usuario = await Usuario.findOne({
                 where: { email: email }
             });
@@ -21,7 +21,7 @@ class LoginController {
                 });
             }
 
-            if (usuario.senha !== senha) {
+            if (usuario.password !== password) {
                 return res.status(401).send({
                     message: 'Tentativa de Login Falhou!',
                     cause: 'Senha Incorreta!'
@@ -30,7 +30,7 @@ class LoginController {
 
             const payload = {
                 "email": usuario.email,
-                "senha": usuario.senha,
+                "password": usuario.password,
             };
 
             const token = sign(payload, JWT_SECRET, {
