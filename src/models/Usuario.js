@@ -1,7 +1,7 @@
 const { connect } = require('../database/connect');
 const sequelize = require('sequelize');
 
-const Usuario = connection.define('usuario', {
+const Usuario = connect.define('usuarios', {
     name:{  
         type: sequelize.STRING,
         validate: {
