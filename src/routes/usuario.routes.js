@@ -17,6 +17,7 @@ const auth = require('../middlewares/auth');
 class UsuarioRoutes {
     routesFromUsuario() {
         const usuarioRoutes = Router()
+
         usuarioRoutes.post('/createOneUsuario', createOneUsuario);
         usuarioRoutes.post('/loginUsuario', loginUsuario);
         usuarioRoutes.get('/listAllUsuarios', auth, listAllUsuarios);
@@ -26,6 +27,7 @@ class UsuarioRoutes {
         usuarioRoutes.patch('/updateOneSenha/:id/senha', auth, updateOneSenha);
         usuarioRoutes.delete('/deleteOneUsuario/:id', auth, deleteOneUsuario);
         usuarioRoutes.patch('/restoreOneUsuario/:id', auth, restoreOneUsuario);
+
         return usuarioRoutes;
     }
 }
