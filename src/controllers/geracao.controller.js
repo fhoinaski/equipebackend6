@@ -13,7 +13,7 @@ class GeracaoController {
     try {
 
       if (!unidadeId) {
-        throw new Error("O ID da inidade deve ser informada.")
+        throw new Error("O ID da unidade deve ser informada.")
       }
 
       if (!referenceDate) {
@@ -21,7 +21,7 @@ class GeracaoController {
       }
 
       if (!totalGenerated) {
-        throw new Error("A quantidade deve KW ser informada.")
+        throw new Error("A quantidade deve kW ser informada.")
       }
 
       const geracaoMensal = await Geracao.findOne({
@@ -43,21 +43,12 @@ class GeracaoController {
       return response.status(200).send({ "Identificador": Geracao.id, message: "Novo lançamento incluido com sucesso" })
 
     } catch (error) {
-
       if (error.message.split('\n').length > 1) {
         return response.status(400).json({ message: "Erro ao criar o lançamento", causes: error.message.split('\n') })
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao criar lançamento", cause: error.message })
-
-    } catch (error) {
-
-      if (error.message.split('\n').length > 1) {
-        return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", causes: error.message.split('\n') })
-      }
-      console.log(error.message.split('\n'))
-      return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", cause: error.message })
-    }    
+    }
   }
 }
 
