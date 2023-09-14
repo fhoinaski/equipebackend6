@@ -2,7 +2,7 @@ const { connect } = require('../database/connect');
 const sequelize = require('sequelize');
 
 const Geracao = connect.define('geracao', {
-    UnidadeId: {
+    unidadeId: {
         type: sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -18,7 +18,7 @@ const Geracao = connect.define('geracao', {
             }
         }
     },
-    reference_date: {
+    referenceDate: {
         type: sequelize.DATE,
         validate: {
             notEmpty: {
@@ -27,7 +27,7 @@ const Geracao = connect.define('geracao', {
         }
       },
 
-    total_generated: {
+    totalGenerated: {
         type: sequelize.INTEGER,
         validate: {
             notEmpty: {
