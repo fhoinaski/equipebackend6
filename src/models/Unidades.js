@@ -1,7 +1,7 @@
-const { connection } = require('../database/connect');
+const { connect } = require('../database/connect');
 const sequelize = require('sequelize');
 
-const Unidade = connection.define('unidades', {
+const Unidade = connect.define('unidades', {
 
     nickname: {
         type: sequelize.STRING,

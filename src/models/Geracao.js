@@ -1,7 +1,7 @@
-const { connection } = require('../database/connect');
+const { connect } = require('../database/connect');
 const sequelize = require('sequelize');
 
-const Geracao = connection.define('geracao', {
+const Geracao = connect.define('geracao', {
     UnidadeId: {
         type: sequelize.INTEGER,
         allowNull: false,
