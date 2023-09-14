@@ -308,7 +308,7 @@ class UsuarioController {
         try {
             const { id } = req.params;
 
-            const usuario = await Usuario.findByPK({ paranoid: false });
+            const usuario = await Usuario.findByPk(id, { paranoid: false });
 
             if (!usuario) {
                 return res.status(404).send({

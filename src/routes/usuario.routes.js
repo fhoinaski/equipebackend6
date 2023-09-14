@@ -5,7 +5,7 @@ const {
     listOneUsuario,
     updateOneUsuario,
     updateOneStatus,
-    updateOneSenha,
+    updateOnePassword,
     deleteOneUsuario,
     restoreOneUsuario,
 } = require('../controllers/usuario.controller');
@@ -23,7 +23,7 @@ class UsuarioRoutes {
         usuarioRoutes.get('/listOneUsuario/:id', auth, listOneUsuario);
         usuarioRoutes.patch('/updateOneUsuario/:id', auth, updateOneUsuario);
         //usuarioRoutes.patch('/updateOneStatus/:id/status', auth, updateOneStatus);
-        //usuarioRoutes.patch('/updateOneSenha/:id/senha', auth, updateOneSenha);
+        //usuarioRoutes.patch('/updateOnePassword/:id/password', auth, updateOnePassword);
         usuarioRoutes.delete('/deleteOneUsuario/:id', auth, deleteOneUsuario);
         usuarioRoutes.patch('/restoreOneUsuario/:id', auth, restoreOneUsuario);
         return usuarioRoutes;
