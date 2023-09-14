@@ -13,6 +13,10 @@ class UsuarioController {
                 name,
                 email,
                 password,
+<<<<<<< HEAD
+=======
+                status
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
             } = req.body;
 
             const usuarioExistente = await Usuario.findOne({
@@ -29,7 +33,12 @@ class UsuarioController {
             const usuario = await Usuario.create({
                 name,
                 email,
+<<<<<<< HEAD
                 password,
+=======
+                password: password,
+                status
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
             });
 
             return res.status(200).send({
@@ -38,7 +47,11 @@ class UsuarioController {
             });
         } catch (error) {
             const message = error.message.message || error.message;
+<<<<<<< HEAD
             return res.status().send({
+=======
+            return res.status(status).send({
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
                 message: 'Falha na operação de criar usuário',
                 cause: message
             });
@@ -80,7 +93,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de login',
                 cause: message
             });
@@ -97,14 +110,14 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de listar usuários',
                 cause: message
             });
         }
     }
 
-    async listOneUsusario(req, res) {
+    async listOneUsuario(req, res) {
         try {
             const { id } = req.params;
             const usuario = await Usuario.findOne({
@@ -128,7 +141,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de listar usuário',
                 cause: message
             });
@@ -141,7 +154,12 @@ class UsuarioController {
             const {
                 name,
                 email,
+<<<<<<< HEAD
                 password
+=======
+                password,
+                status
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
             } = req.body;
 
             const usuario = await Usuario.findOne({
@@ -155,7 +173,11 @@ class UsuarioController {
                 });
             }
 
+<<<<<<< HEAD
             if (!name && !email && !password ) {
+=======
+            if (!nome && !email && !password && !status) {
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
                 return res.status(400).send({
                     message: 'Falha na operação de atualizar usuário',
                     cause: 'Nenhum dado para atualizar'
@@ -171,7 +193,14 @@ class UsuarioController {
             if (password !== undefined) {
                 usuario.password = password;
             }
+<<<<<<< HEAD
         
+=======
+            if (status !== undefined) {
+                usuario.status = status;
+            }
+
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
             await usuario.save();
 
             return res.status(200).send({
@@ -181,7 +210,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de atualizar usuário',
                 cause: message
             });
@@ -219,7 +248,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de atualizar status',
                 cause: message
             });
@@ -258,8 +287,13 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
+<<<<<<< HEAD
             return res.status(parceInt(status)).send({
                 message: 'Falha na operação de atualizar password',
+=======
+            return res.status(status).send({
+                message: 'Falha na operação de atualizar senha',
+>>>>>>> 633978c1448939219cafaffd638e877be3c6287a
                 cause: message
             });
         }
@@ -269,7 +303,7 @@ class UsuarioController {
         try {
             const { id } = req.params;
 
-            const usuario = await Usuario.findByPK({ paranoid: true });
+            const usuario = await Usuario.findByPk(id, { paranoid: true });
 
             if (!usuario) {
                 return res.status(404).send({
@@ -290,7 +324,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de deletar usuário',
                 cause: message
             });
@@ -301,7 +335,7 @@ class UsuarioController {
         try {
             const { id } = req.params;
 
-            const usuario = await Usuario.findByPK({ paranoid: false });
+            const usuario = await Usuario.findByPk(id, { paranoid: false });
 
             if (!usuario) {
                 return res.status(404).send({
@@ -321,7 +355,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de restaurar usuário',
                 cause: message
             });
