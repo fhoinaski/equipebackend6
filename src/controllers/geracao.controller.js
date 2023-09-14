@@ -50,7 +50,9 @@ class GeracaoController {
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao criar lançamento", cause: error.message })
-
+    }
+  }
+  
   async listaGeracaoDaUnidade (request, response) {
     const { unidadeId } = request.params
     
