@@ -34,7 +34,7 @@ class GeracaoController {
         return response.status(400).send({ message: "Já existe lançamento para essa unidade nesse mês" })
       }
 
-      const novaGeracaoMensal = await Deposit_Medicine.create({
+      const novaGeracaoMensal = await Geracao.create({
             unidadeId,
             referenceDate, 
             totalGenerated
@@ -59,13 +59,7 @@ class GeracaoController {
     try { 
 
      const geracoes = await Geracao.findAll({
-      where: { id: unidadeId},
-      include: [
-        {
-          model: Unidade,
-          as: 'geracao'
-        },
-      ],
+      where: { unidade_id: unidadeId},
     });
  
       return response.status(200).send(
