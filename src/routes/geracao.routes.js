@@ -1,3 +1,4 @@
+
 const {
     listAllUnidades,
     createOneDate,
@@ -27,3 +28,4 @@ class GeracaoRoutes {
 }
 
 module.exports = new GeracaoRoutes();
+
