@@ -1,5 +1,5 @@
 const { Usuario } = require('../models/Usuario');
-const { senha } = require('../models/Usuario');
+const { password } = require('../models/Usuario');
 const { JWT_SECRET } = require('../config/db.config');
 const { config } = require('dotenv');
 const { sign } = require('jsonwebtoken');
@@ -10,10 +10,13 @@ class UsuarioController {
     async createOneUsuario(req, res) {
         try {
             const {
+<<<<<<< HEAD
                 nome,
+=======
+                name,
+>>>>>>> 3e007c3284f5d2d5f421b61b40376e08055ec7a7
                 email,
-                senha,
-                status
+                password,
             } = req.body;
 
             const usuarioExistente = await Usuario.findOne({
@@ -28,10 +31,15 @@ class UsuarioController {
             }
 
             const usuario = await Usuario.create({
-                nome,
+                name,
                 email,
+<<<<<<< HEAD
                 senha,            
                 status
+=======
+                password,
+
+>>>>>>> 3e007c3284f5d2d5f421b61b40376e08055ec7a7
             });
 
             return res.status(200).send({
@@ -39,9 +47,13 @@ class UsuarioController {
                 usuario
             });
         } catch (error) {
-            const status = error.message.status || 400;
             const message = error.message.message || error.message;
+<<<<<<< HEAD
             return res.status(parseInt(status)).send({
+=======
+            return res.status().send({
+
+>>>>>>> 3e007c3284f5d2d5f421b61b40376e08055ec7a7
                 message: 'Falha na operação de criar usuário',
                 cause: message
             });
@@ -50,7 +62,7 @@ class UsuarioController {
 
     async loginUsuario(req, res) {
         try {
-            const { email, senha } = req.body;
+            const { email, password } = req.body;
 
             const usuario = await Usuario.findOne({
                 where: { email: email }
@@ -63,7 +75,7 @@ class UsuarioController {
                 });
             }
 
-            if (usuario.senha !== senha) {
+            if (usuario.password !== password) {
                 return res.status(400).send({
                     message: 'Falha na operação de login',
                     cause: 'Senha inválida'
@@ -72,7 +84,7 @@ class UsuarioController {
 
             const payload = {
                 "email": usuario.email,
-                "senha": usuario.senha
+                "password": usuario.password
             }
             const token = sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
@@ -83,7 +95,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de login',
                 cause: message
             });
@@ -100,14 +112,14 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de listar usuários',
                 cause: message
             });
         }
     }
 
-    async listOneUsusario(req, res) {
+    async listOneUsuario(req, res) {
         try {
             const { id } = req.params;
             const usuario = await Usuario.findOne({
@@ -131,7 +143,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de listar usuário',
                 cause: message
             });
@@ -142,11 +154,10 @@ class UsuarioController {
         try {
             const { id } = req.params;
             const {
-                nome,
+                name,
                 email,
-                senha,
-                cpf,
-                status
+                password
+
             } = req.body;
 
             const usuario = await Usuario.findOne({
@@ -160,29 +171,23 @@ class UsuarioController {
                 });
             }
 
-            if (!nome && !email && !senha && !cpf && !status) {
+            if (!name && !email && !password ) {
+
                 return res.status(400).send({
                     message: 'Falha na operação de atualizar usuário',
                     cause: 'Nenhum dado para atualizar'
                 });
             }
 
-            if (nome !== undefined) {
-                usuario.nome = nome;
+            if (name !== undefined) {
+                usuario.name = name;
             }
             if (email !== undefined) {
                 usuario.email = email;
             }
-            if (senha !== undefined) {
+            if (password !== undefined) {
                 usuario.password = password;
             }
-            if (cpf !== undefined) {
-                usuario.cpf = cpf;
-            }
-            if (status !== undefined) {
-                usuario.status = status;
-            }
-
             await usuario.save();
 
             return res.status(200).send({
@@ -192,7 +197,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de atualizar usuário',
                 cause: message
             });
@@ -230,7 +235,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de atualizar status',
                 cause: message
             });
@@ -240,7 +245,7 @@ class UsuarioController {
     async updateOnePassword(req, res) {
         try {
             const { id } = req.params;
-            const { senha } = req.body;
+            const { password } = req.body;
 
             const usuario = await Usuario.findOne({
                 where: { id: id }
@@ -248,19 +253,19 @@ class UsuarioController {
 
             if (!usuario) {
                 return res.status(404).send({
-                    message: 'Falha na operação de atualizar senha',
+                    message: 'Falha na operação de atualizar password',
                     cause: 'Usuário não encontrado'
                 });
             }
 
-            if (!senha) {
+            if (!password) {
                 return res.status(400).send({
-                    message: 'Falha na operação de atualizar senha',
+                    message: 'Falha na operação de atualizar password',
                     cause: 'Senha não informada'
                 });
             }
 
-            await Usuario.update({ senha }, { where: { id: id } });
+            await Usuario.update({ password }, { where: { id: id } });
 
             return res.status(200).send({
                 message: 'Senha atualizada com sucesso',
@@ -270,7 +275,8 @@ class UsuarioController {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
             return res.status(parceInt(status)).send({
-                message: 'Falha na operação de atualizar senha',
+                message: 'Falha na operação de atualizar password',
+
                 cause: message
             });
         }
@@ -280,7 +286,7 @@ class UsuarioController {
         try {
             const { id } = req.params;
 
-            const usuario = await Usuario.findByPK({ paranoid: true });
+            const usuario = await Usuario.findByPk(id, { paranoid: true });
 
             if (!usuario) {
                 return res.status(404).send({
@@ -301,7 +307,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de deletar usuário',
                 cause: message
             });
@@ -312,7 +318,7 @@ class UsuarioController {
         try {
             const { id } = req.params;
 
-            const usuario = await Usuario.findByPK({ paranoid: false });
+            const usuario = await Usuario.findByPk(id, { paranoid: false });
 
             if (!usuario) {
                 return res.status(404).send({
@@ -332,7 +338,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(status).send({
                 message: 'Falha na operação de restaurar usuário',
                 cause: message
             });

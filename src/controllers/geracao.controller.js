@@ -4,6 +4,7 @@ const { Unidade } = require("../models/unidades");
 class GeracaoController {
 
   async createOneGeracao(request, response) {
+
     const {  unidadeId,
              referenceDate, 
              totalGenerated 
@@ -25,8 +26,8 @@ class GeracaoController {
 
       const geracaoMensal = await Geracao.findOne({
         where: {
-            unidadeId,
-            referenceDate
+          unidadeId,
+          referenceDate
         }
       })
 
@@ -34,7 +35,7 @@ class GeracaoController {
         return response.status(400).send({ message: "Já existe lançamento para essa unidade nesse mês" })
       }
 
-      const novaGeracaoMensal = await Deposit_Medicine.create({
+      const novaGeracaoMensal = await Geracao.create({
             unidadeId,
             referenceDate, 
             totalGenerated
@@ -49,23 +50,16 @@ class GeracaoController {
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao criar lançamento", cause: error.message })
-    } 
-
+    }
   }
-
+  
   async listaGeracaoDaUnidade (request, response) {
     const { unidadeId } = request.params
     
     try { 
 
      const geracoes = await Geracao.findAll({
-      where: { id: unidadeId},
-      include: [
-        {
-          model: Unidade,
-          as: 'geracao'
-        },
-      ],
+      where: { unidade_id: unidadeId},
     });
  
       return response.status(200).send(
@@ -81,10 +75,8 @@ class GeracaoController {
       }
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", cause: error.message })
-    }
-      
-    }
-
+    }    
+  }
 }
 
 module.exports = new GeracaoController();
