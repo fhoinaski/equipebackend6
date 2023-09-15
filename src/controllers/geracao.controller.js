@@ -34,11 +34,11 @@ class GeracaoController {
       if (geracaoMensal) {
         return response.status(400).send({ message: "Já existe lançamento para essa unidade nesse mês" })
       }
-      
+
       const novaGeracaoMensal = await Deposit_Medicine.create({
-            unidadeId,
-            referenceDate, 
-            totalGenerated
+        unidadeId,
+        referenceDate,
+        totalGenerated
       })
 
       return response.status(200).send({ "Identificador": Geracao.id, message: "Novo lançamento incluido com sucesso" })
@@ -50,14 +50,7 @@ class GeracaoController {
       console.log(error.message.split('\n'))
       return response.status(400).json({ message: "Erro ao criar lançamento", cause: error.message })
 
-    } catch (error) {
-
-      if (error.message.split('\n').length > 1) {
-        return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", causes: error.message.split('\n') })
-      }
-      console.log(error.message.split('\n'))
-      return response.status(400).json({ message: "Erro ao consultar as gerações da unidade", cause: error.message })
-    }    
+    }
   }
 }
 
