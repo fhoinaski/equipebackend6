@@ -1,7 +1,7 @@
 const { Usuario } = require('../models/Usuario');
 const { senha } = require('../models/Usuario');
 const { JWT_SECRET } = require('../config/db.config');
-const { config } = require('dorenv');
+const { config } = require('dotenv');
 const { sign } = require('jsonwebtoken');
 const { res } = require('express');
 config();
@@ -10,6 +10,7 @@ class UsuarioController {
     async createOneUsuario(req, res) {
         try {
             const {
+                nome,
                 email,
                 senha,
                 status
@@ -29,8 +30,7 @@ class UsuarioController {
             const usuario = await Usuario.create({
                 nome,
                 email,
-                senha,
-                cpf,
+                senha,            
                 status
             });
 
@@ -41,7 +41,7 @@ class UsuarioController {
         } catch (error) {
             const status = error.message.status || 400;
             const message = error.message.message || error.message;
-            return res.status(parceInt(status)).send({
+            return res.status(parseInt(status)).send({
                 message: 'Falha na operação de criar usuário',
                 cause: message
             });
